@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="laranjaApp">#FE914C</color>
+    <color name="laranjaClaroApp">#F59B5F</color>
 </resources>

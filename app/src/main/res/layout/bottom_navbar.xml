@@ -1,0 +1,38 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:elevation="8dp"
+    android:gravity="center"
+    android:paddingHorizontal="24dp">
+
+    <!-- Home icon -->
+    <ImageView
+        android:id="@+id/nav_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ic_home"
+        android:contentDescription="Home" />
+
+    <!-- Lista icon -->
+    <ImageView
+        android:id="@+id/nav_lista"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ic_search"
+        android:contentDescription="Lista" />
+
+    <!-- Doacao icon -->
+    <ImageView
+        android:id="@+id/nav_doacao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/ic_doacao"
+        android:contentDescription="Doacao" />
+
+</LinearLayout>
