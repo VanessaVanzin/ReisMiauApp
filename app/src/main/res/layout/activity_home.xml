@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -70,6 +71,24 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- 'Sobre' Title -->
+    <TextView
+        android:id="@+id/sobre_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="35dp"
+        android:text="Sobre"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/top_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/title_background"/>
+
     <!-- segundo card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cat_card"
@@ -79,7 +98,7 @@
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
         app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/top_card"
+        app:layout_constraintTop_toBottomOf="@id/sobre_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -112,5 +131,144 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <!-- terceiro card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/adoption_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/cat_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/adoption_text"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingHorizontal="5dp"
+                android:text="Conheça nossos animais disponíveis para adoção."
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/adoption_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded_button"
+                android:src="@drawable/ic_arrow"
+                android:contentDescription="Arrow Icon"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- quarto card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/help_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/adoption_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/help_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Precisamos de recursos para continuar. Saiba como ajudar."
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textAlignment="viewStart" />
+
+            <ImageButton
+                android:id="@+id/help_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded_button"
+                android:src="@drawable/ic_arrow"
+                android:contentDescription="Arrow Icon"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- quinto card (Instagram aviso) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/instagram_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/help_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/instagram_icon"
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:contentDescription="Instagram Icon"
+                android:src="@drawable/ic_instagram" />
+
+            <TextView
+                android:id="@+id/instagram_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="Fique por dentro das novidades da nossa organização! @reismiau."
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textAlignment="viewStart" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <include
+        layout="@layout/bottom_navbar"
+        android:id="@+id/bottom_navbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

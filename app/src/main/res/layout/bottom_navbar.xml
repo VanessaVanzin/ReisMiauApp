@@ -1,38 +1,50 @@
-<LinearLayout
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_navbar"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:orientation="horizontal"
-    android:background="@color/white"
+    android:layout_height="50dp"
     android:elevation="8dp"
-    android:gravity="center"
-    android:paddingHorizontal="24dp">
+    android:paddingHorizontal="24dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
 
     <!-- Home icon -->
     <ImageView
         android:id="@+id/nav_home"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginStart="50dp"
+        android:contentDescription="Home"
         android:src="@drawable/ic_home"
-        android:contentDescription="Home" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Lista icon -->
     <ImageView
         android:id="@+id/nav_lista"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:src="@drawable/ic_search"
-        android:contentDescription="Lista" />
+        android:contentDescription="Lista"
+        app:layout_constraintStart_toEndOf="@id/nav_home"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/nav_doacao" />
 
     <!-- Doacao icon -->
     <ImageView
         android:id="@+id/nav_doacao"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginEnd="50dp"
+        android:contentDescription="Doacao"
         android:src="@drawable/ic_doacao"
-        android:contentDescription="Doacao" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
