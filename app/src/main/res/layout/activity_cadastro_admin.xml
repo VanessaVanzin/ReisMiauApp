@@ -1,0 +1,207 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:id="@+id/cadastroAdmin">
+
+    <ImageButton android:id="@+id/btnVoltar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_arrow_back"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="Voltar"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        app:tint="@android:color/white"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btnVoltar"
+        android:layout_above="@id/bottomNavbar"
+        android:paddingHorizontal="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/white"
+            android:clipToOutline="true"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/txtCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="64dp"
+                android:background="@drawable/bg_card_title"
+                android:text="Cadastro"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome"
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/edtNome"
+                style="@style/CustomEditText"
+                android:hint="Digite o nome do gato"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Idade"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtIdade"
+                style="@style/CustomEditText"
+                android:hint="Digite a idade. ex: 3 anos e 6 meses"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gênero"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtGenero"
+                style="@style/CustomEditText"
+                android:hint="Selecione o gênero"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableRight="@drawable/ic_arrow_down"
+                android:focusable="false"
+                android:clickable="true"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Raça"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtRaca"
+                style="@style/CustomEditText"
+                android:hint="Selecione a raça"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableRight="@drawable/ic_arrow_down"
+                android:focusable="false"
+                android:clickable="true"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtStatus"
+                style="@style/CustomEditText"
+                android:hint="Selecione o status"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableRight="@drawable/ic_arrow_down"
+                android:focusable="false"
+                android:clickable="true"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrição"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtDescricao"
+                style="@style/CustomEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:hint="Digite uma breve descrição"
+                android:minLines="4"
+                android:maxLines="6"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Foto"
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnTirarFoto"
+                    style="@style/CustomOutlineButton"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_camera"
+                    android:text="Tirar Foto"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDaGaleria"
+                    style="@style/CustomOutlineButton"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_gallery"
+                    android:text="Da Galeria"/>
+
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSalvar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/btn_salvar"
+                android:padding="12dp"
+                android:text="Salvar"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </ScrollView>
+    <include android:id="@+id/bottomNavbar"
+        layout="@layout/bottom_navbar"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+</RelativeLayout>

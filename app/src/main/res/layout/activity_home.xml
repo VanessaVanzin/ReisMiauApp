@@ -71,7 +71,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- 'Sobre' Title -->
+    <!-- 'Sobre' -->
     <TextView
         android:id="@+id/sobre_title"
         android:layout_width="match_parent"
