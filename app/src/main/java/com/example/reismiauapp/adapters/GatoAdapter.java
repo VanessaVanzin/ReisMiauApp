@@ -1,5 +1,7 @@
-package com.example.reismiauapp.adapter;
+package com.example.reismiauapp.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reismiauapp.DetalhesGatoActivity;
 import com.example.reismiauapp.R;
-import com.example.reismiauapp.model.Gato;
+import com.example.reismiauapp.models.Gato;
 
 import java.util.List;
 
@@ -51,6 +54,11 @@ public class GatoAdapter extends RecyclerView.Adapter<GatoAdapter.GatoViewHolder
     @Override
     public void onBindViewHolder(@NonNull GatoViewHolder holder, int position) {
         holder.bind(gatoLista.get(position));
+        holder.itemView.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, DetalhesGatoActivity.class);
+            context.startActivity(intent);
+        });
     }
 
     @Override

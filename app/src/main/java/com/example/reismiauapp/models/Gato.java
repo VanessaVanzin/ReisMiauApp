@@ -1,4 +1,4 @@
-package com.example.reismiauapp.model;
+package com.example.reismiauapp.models;
 
 public class Gato {
 

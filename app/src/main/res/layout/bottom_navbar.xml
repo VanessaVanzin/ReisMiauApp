@@ -40,9 +40,21 @@
         android:id="@+id/nav_doacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:contentDescription="Doacao"
         android:src="@drawable/ic_doacao"
+        android:contentDescription="Doacao"
+        app:layout_constraintStart_toEndOf="@id/nav_lista"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/nav_cadastroAdmin" />
+
+    <!-- Cadastro icon -->
+    <ImageView
+        android:id="@+id/nav_cadastroAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:contentDescription="Cadastro Admin"
+        android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

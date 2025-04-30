@@ -136,7 +136,7 @@
 
     <!-- terceiro card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/adoption_card"
+        android:id="@+id/lista_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -157,7 +157,7 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/adoption_text"
+                android:id="@+id/lista_text"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -168,7 +168,7 @@
                 android:textSize="16sp" />
 
             <ImageButton
-                android:id="@+id/adoption_button"
+                android:id="@+id/btnLista"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/rounded_button"
@@ -181,7 +181,7 @@
 
     <!-- quarto card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/help_card"
+        android:id="@+id/doacao_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -190,7 +190,7 @@
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
         app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/adoption_card"
+        app:layout_constraintTop_toBottomOf="@id/lista_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -202,7 +202,7 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/help_text"
+                android:id="@+id/doacao_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -212,7 +212,7 @@
                 android:textAlignment="viewStart" />
 
             <ImageButton
-                android:id="@+id/help_button"
+                android:id="@+id/btnDoacao"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/rounded_button"
@@ -234,7 +234,7 @@
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
         app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/help_card"
+        app:layout_constraintTop_toBottomOf="@id/doacao_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

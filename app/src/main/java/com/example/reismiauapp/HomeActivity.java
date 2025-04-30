@@ -3,6 +3,8 @@ package com.example.reismiauapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -11,7 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.reismiauapp.helpers.BottomNavBarHelper;
+
 public class HomeActivity extends AppCompatActivity {
+    private ImageButton btnLista, btnDoacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,25 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
+        btnLista = findViewById(R.id.btnLista);
+        btnDoacao = findViewById(R.id.btnDoacao);
         ImageView instagramIcon = findViewById(R.id.instagram_icon);
+
+        btnLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ListaGatosActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnDoacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, DoacaoActivity.class);
+                startActivity(intent);
+            }
+        });
 
         instagramIcon.setOnClickListener(v -> {
             String instagramUrl = "https://www.instagram.com/reismiau/";
@@ -32,5 +55,7 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(instagramUrl));
             startActivity(intent);
         });
+
+        BottomNavBarHelper.setup(this);
     }
 }

@@ -102,10 +102,10 @@
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingBottom="70dp"
-        app:layout_constraintTop_toBottomOf="@id/cardFilters"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navbar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/cardFilters" />
 
     <include
         layout="@layout/bottom_navbar"

@@ -144,14 +144,15 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_visibility"/>
         </RelativeLayout>
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnEntrar"
+            android:id="@+id/btnCadastrar"
             android:layout_width="match_parent"
             android:layout_height="50dp" android:layout_marginTop="4dp"
             android:background="@drawable/btn_default"
             android:padding="12dp"
             android:textSize="20sp"
-            android:text="Entrar"
+            android:text="Cadastrar"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold"/>

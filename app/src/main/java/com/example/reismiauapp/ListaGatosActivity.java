@@ -10,8 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.reismiauapp.adapter.GatoAdapter;
-import com.example.reismiauapp.model.Gato;
+import com.example.reismiauapp.adapters.GatoAdapter;
+import com.example.reismiauapp.helpers.BottomNavBarHelper;
+import com.example.reismiauapp.models.Gato;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,5 +56,7 @@ public class ListaGatosActivity extends AppCompatActivity {
 
         adapter = new GatoAdapter(gatoLista);
         recyclerView.setAdapter(adapter);
+
+        BottomNavBarHelper.setup(this);
     }
 }
