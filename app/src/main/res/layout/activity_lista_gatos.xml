@@ -61,12 +61,14 @@
                 android:layout_marginTop="8dp">
 
                 <CheckBox
+                    style="@style/CustomCheckBoxStyle"
                     android:id="@+id/filter_filhote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Filhote (até 2 anos)" />
 
                 <CheckBox
+                    style="@style/CustomCheckBoxStyle"
                     android:id="@+id/filter_femea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,18 +76,21 @@
                     android:layout_marginEnd="54dp"/>
 
                 <CheckBox
+                    style="@style/CustomCheckBoxStyle"
                     android:id="@+id/filter_adulto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Adulto (até 8 anos)" />
 
                 <CheckBox
+                    style="@style/CustomCheckBoxStyle"
                     android:id="@+id/filter_macho"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Macho" />
 
                 <CheckBox
+                    style="@style/CustomCheckBoxStyle"
                     android:id="@+id/filter_senior"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
