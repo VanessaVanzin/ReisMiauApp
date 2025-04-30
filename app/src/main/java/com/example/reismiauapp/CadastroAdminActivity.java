@@ -43,7 +43,7 @@ public class CadastroAdminActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         if (data != null && data.getExtras() != null) {
                             Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-                            // TODO: colocar na tela a imagem
+                            // colocar na tela a imagem
                         }
                     }
                 }
@@ -56,7 +56,7 @@ public class CadastroAdminActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         if (data != null) {
                             Uri selectedImageUri = data.getData();
-                            // TODO: colocar na tela a imagem
+                            // colocar na tela a imagem
                         }
                     }
                 }
