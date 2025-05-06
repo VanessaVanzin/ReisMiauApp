@@ -43,7 +43,6 @@
             android:src="@drawable/gatoteste" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Card infos -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardInfo"
         android:layout_width="0dp"
@@ -64,7 +63,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Nome e Edição -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -95,7 +93,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/catName"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Tags -->
             <LinearLayout
                 android:id="@+id/catTags"
                 android:layout_width="wrap_content"
@@ -137,7 +134,6 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Descrição -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,7 +152,6 @@
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
-            <!-- Botão de Adotar -->
             <Button
                 android:id="@+id/btnAdotar"
                 android:layout_width="match_parent"
@@ -171,7 +166,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
     <include
         layout="@layout/bottom_navbar"

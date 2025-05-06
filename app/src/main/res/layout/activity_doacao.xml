@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -210,7 +209,6 @@
                         android:src="@drawable/ic_mail"
                         android:contentDescription="Email"
                         android:layout_margin="8dp"/>
-
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
