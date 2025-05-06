@@ -1,276 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- primeiro card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/top_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center_horizontal">
+            android:paddingBottom="50dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/logo_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/logo"
-                    android:contentDescription="Logo" />
-
-                <TextView
-                    android:id="@+id/title_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reis Miau"
-                    android:textSize="28sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginStart="12dp"/>
-            </LinearLayout>
-
+            <!-- primeiro card -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/orange_box"
-                android:layout_width="match_parent"
+                android:id="@+id/top_card"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardBackgroundColor="@color/laranjaApp">
+                android:layout_margin="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <TextView
-                    android:id="@+id/orange_text"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seja bem-vindo ao Reis Miau, uma ONG que ama e resgata gatos em situações de risco, cuida deles e encontra lares temporários."
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:padding="16dp"
-                    android:textAlignment="center" />
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/logo_image"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/logo"
+                            android:contentDescription="Logo" />
+
+                        <TextView
+                            android:id="@+id/title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reis Miau"
+                            android:textSize="28sp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:layout_marginStart="12dp"/>
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/orange_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardBackgroundColor="@color/laranjaApp">
+
+                        <TextView
+                            android:id="@+id/orange_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Seja bem-vindo ao Reis Miau, uma ONG que ama e resgata gatos em situações de risco, cuida deles e encontra lares temporários."
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:padding="16dp"
+                            android:textAlignment="center" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <!-- 'Sobre' -->
-    <TextView
-        android:id="@+id/sobre_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="30dp"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="64dp"
-        android:background="@drawable/bg_card_title"
-        android:text="Sobre"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/top_card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- segundo card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cat_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/sobre_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/cat_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/cat"
-                android:scaleType="centerCrop"
-                android:contentDescription="Cat"
-                android:clipToOutline="true" />
-
+            <!-- 'Sobre' -->
             <TextView
-                android:id="@+id/cat_text"
+                android:id="@+id/sobre_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:text="Nosso sonho é que todos estes gatos tenham a vida que merecem, uma vida de rei. Adote um gatinho e ganhe um pequeno rei para encher sua vida de amor e ronronadas!"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textAlignment="viewStart" />
-        </LinearLayout>
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="30dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="64dp"
+                android:background="@drawable/bg_card_title"
+                android:text="Sobre"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/top_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-    </androidx.cardview.widget.CardView>
-
-    <!-- terceiro card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lista_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/cat_card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/lista_text"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingHorizontal="5dp"
-                android:text="Conheça nossos animais disponíveis para adoção."
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <ImageButton
-                android:id="@+id/btnLista"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/rounded_button"
-                android:src="@drawable/ic_arrow"
-                android:contentDescription="Arrow Icon"
-                app:tint="@color/white" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- quarto card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/doacao_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/lista_card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/doacao_text"
+            <!-- segundo card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cat_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Precisamos de recursos para continuar. Saiba como ajudar."
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textAlignment="viewStart" />
+                android:layout_margin="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/sobre_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <ImageButton
-                android:id="@+id/btnDoacao"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/rounded_button"
-                android:src="@drawable/ic_arrow"
-                android:contentDescription="Arrow Icon"
-                app:tint="@color/white" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:id="@+id/cat_image"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/cat"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Cat"
+                        android:clipToOutline="true" />
 
-    <!-- quinto card (Instagram aviso) -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/instagram_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/doacao_card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+                    <TextView
+                        android:id="@+id/cat_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Nosso sonho é que todos estes gatos tenham a vida que merecem, uma vida de rei. Adote um gatinho e ganhe um pequeno rei para encher sua vida de amor e ronronadas!"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="16dp">
+            </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/instagram_icon"
-                android:layout_width="30dp"
-                android:layout_height="32dp"
-                android:contentDescription="Instagram Icon"
-                android:src="@drawable/ic_instagram" />
-
-            <TextView
-                android:id="@+id/instagram_text"
+            <!-- terceiro card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/lista_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="Fique por dentro das novidades da nossa organização! @reismiau."
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textAlignment="viewStart" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/cat_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/lista_text"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="5dp"
+                        android:text="Conheça nossos animais disponíveis para adoção."
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id="@+id/btnLista"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/rounded_button"
+                        android:src="@drawable/ic_arrow"
+                        android:contentDescription="Arrow Icon"
+                        app:tint="@color/white" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- quarto card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/doacao_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/lista_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/doacao_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Precisamos de recursos para continuar. Saiba como ajudar."
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textAlignment="viewStart" />
+
+                    <ImageButton
+                        android:id="@+id/btnDoacao"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/rounded_button"
+                        android:src="@drawable/ic_arrow"
+                        android:contentDescription="Arrow Icon"
+                        app:tint="@color/white" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- quinto card (Instagram aviso) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/instagram_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/doacao_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/instagram_icon"
+                        android:layout_width="30dp"
+                        android:layout_height="32dp"
+                        android:contentDescription="Instagram Icon"
+                        android:src="@drawable/ic_instagram" />
+
+                    <TextView
+                        android:id="@+id/instagram_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Fique por dentro das novidades da nossa organização! @reismiau."
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <include
-        layout="@layout/bottom_navbar"
-        android:id="@+id/bottom_navbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+    layout="@layout/bottom_navbar"
+    android:id="@+id/bottom_navbar"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

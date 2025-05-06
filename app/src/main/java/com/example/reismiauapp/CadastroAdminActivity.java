@@ -1,6 +1,7 @@
 package com.example.reismiauapp;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,11 +9,16 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import android.Manifest;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -74,11 +80,13 @@ public class CadastroAdminActivity extends AppCompatActivity {
 
         Button btnTirarFoto = findViewById(R.id.btnTirarFoto);
         btnTirarFoto.setOnClickListener(v -> {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                cameraLauncher.launch(takePictureIntent);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
+            } else {
+                openCamera();
             }
         });
+
 
         Button btnDaGaleria = findViewById(R.id.btnDaGaleria);
         btnDaGaleria.setOnClickListener(v -> {
@@ -87,6 +95,30 @@ public class CadastroAdminActivity extends AppCompatActivity {
             galleryLauncher.launch(pickPhotoIntent);
         });
 
+        ImageButton btnVoltar = findViewById(R.id.btnVoltar);
+        btnVoltar.setOnClickListener(v -> {
+            finish();
+        });
+
         BottomNavBarHelper.setup(this);
+    }
+
+    private void openCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            cameraLauncher.launch(takePictureIntent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "Permissão da câmera negada", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
