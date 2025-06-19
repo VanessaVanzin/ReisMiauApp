@@ -1,4 +1,4 @@
-package com.example.reismiauapp;
+package com.example.reismiauapp.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.reismiauapp.R;
 import com.example.reismiauapp.helpers.BottomNavBarHelper;
 
 public class HomeActivity extends AppCompatActivity {

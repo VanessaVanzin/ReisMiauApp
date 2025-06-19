@@ -21,8 +21,7 @@
             android:layout_height="80dp"
             android:layout_marginEnd="12dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/gatoteste"
-            android:background="@drawable/bg_card"/>
+            android:background="@drawable/bg_card" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -30,23 +29,36 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/catName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome do Gato"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/catName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/catStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textSize="14sp"
+                    android:textColor="#000000" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/catDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descrição resumida do gato."
                 android:textSize="14sp"
                 android:textColor="#555555"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

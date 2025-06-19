@@ -72,7 +72,11 @@
             <EditText
                 android:id="@+id/edtIdade"
                 style="@style/CustomEditText"
-                android:hint="Digite a idade. ex: 3 anos e 6 meses"
+                android:hint="Selecione a idade"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableRight="@drawable/ic_arrow_down"
+                android:focusable="false"
+                android:clickable="true"
                 android:textSize="16dp"/>
 
             <TextView
@@ -104,12 +108,26 @@
             <EditText
                 android:id="@+id/edtRaca"
                 style="@style/CustomEditText"
-                android:hint="Selecione a raça"
+                android:hint="Informe a raça"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamanho"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/edtTamanho"
+                style="@style/CustomEditText"
+                android:clickable="true"
                 android:drawableEnd="@drawable/ic_arrow_down"
                 android:drawableRight="@drawable/ic_arrow_down"
                 android:focusable="false"
-                android:clickable="true"
-                android:textSize="16dp"/>
+                android:hint="Selecione o tamanho"
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"

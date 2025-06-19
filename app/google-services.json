@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "574127261333",
+    "project_id": "reis-miau",
+    "storage_bucket": "reis-miau.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574127261333:android:1475bab4bad9263bd17d9c",
+        "android_client_info": {
+          "package_name": "com.example.reismiauapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "CHAVEAPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

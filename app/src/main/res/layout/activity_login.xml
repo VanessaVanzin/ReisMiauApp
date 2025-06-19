@@ -99,7 +99,7 @@
                 android:layout_centerVertical="true"/>
 
             <ImageView
-                android:id="@+id/btnVerSenha"
+                android:id="@+id/imgVerSenha"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
