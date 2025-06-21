@@ -82,6 +82,7 @@ public class GatoAdapter extends RecyclerView.Adapter<GatoAdapter.GatoViewHolder
             intent.putExtra("raca", gato.race);
             intent.putExtra("tamanho", gato.size);
             intent.putExtra("status", gato.status);
+            intent.putExtra("petId", gato.petId);
 
             if (gato.photos != null && !gato.photos.isEmpty()) {
                 intent.putExtra("fotoUrl", gato.photos.get(0).get("url"));

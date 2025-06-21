@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -21,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.reismiauapp.R;
 import com.example.reismiauapp.helpers.BottomNavBarHelper;
 import com.example.reismiauapp.helpers.UsuarioHelper;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DetalhesGatoActivity extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class DetalhesGatoActivity extends AppCompatActivity {
     private String idade;
     private String raca;
     private String tamanho;
+    private String petId;
     private int status;
 
     private TextView catName, catDescription, catGender, catAge, catRace, catSize, catStatus;
@@ -66,6 +69,7 @@ public class DetalhesGatoActivity extends AppCompatActivity {
 
     private void receberDadosIntent() {
         Intent intent = getIntent();
+        petId = getIntent().getStringExtra("petId");
         nome = intent.getStringExtra("nome");
         descricao = intent.getStringExtra("descricao");
         fotoUrl = intent.getStringExtra("fotoUrl");
@@ -113,7 +117,42 @@ public class DetalhesGatoActivity extends AppCompatActivity {
     private void configurarListeners() {
         btnEditar.setOnClickListener(v -> {
             Intent editIntent = new Intent(DetalhesGatoActivity.this, CadastroAdminActivity.class);
+            editIntent.putExtra("petId", petId);
+            editIntent.putExtra("nome", nome);
+            editIntent.putExtra("descricao", descricao);
+            editIntent.putExtra("genero", genero);
+            editIntent.putExtra("idade", idade);
+            editIntent.putExtra("raca", raca);
+            editIntent.putExtra("tamanho", tamanho);
+            editIntent.putExtra("status", status);
+            //editIntent.putExtra("fotoUrl", fotoUrl); // se quiser preencher depois
             startActivity(editIntent);
+        });
+
+
+        btnExcluir.setOnClickListener(v -> {
+                            if (petId != null && !petId.isEmpty()) {
+                                new androidx.appcompat.app.AlertDialog.Builder(this)
+                                        .setTitle("Confirmar exclusão")
+                                        .setMessage("Tem certeza que deseja excluir este pet?")
+                                        .setPositiveButton("Sim", (dialog, which) -> {
+                                            FirebaseFirestore.getInstance()
+                                                    .collection("pets")
+                                                    .document(petId)
+                                                    .delete()
+                                                    .addOnSuccessListener(unused -> {
+                                                        Toast.makeText(this, "Pet excluído com sucesso!", Toast.LENGTH_SHORT).show();
+                                                        finish();
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Toast.makeText(this, "Erro ao excluir: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    });
+                                        })
+                                        .setNegativeButton("Cancelar", null)
+                        .show();
+            } else {
+                Toast.makeText(this, "Pet não encontrado.", Toast.LENGTH_SHORT).show();
+            }
         });
 
         btnAdotar.setOnClickListener(v -> {

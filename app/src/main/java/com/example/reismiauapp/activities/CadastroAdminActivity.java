@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,6 +23,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.reismiauapp.models.GatoModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.example.reismiauapp.R;
 import com.example.reismiauapp.helpers.BottomNavBarHelper;
 
@@ -31,8 +35,9 @@ public class CadastroAdminActivity extends AppCompatActivity {
 
     private ActivityResultLauncher<Intent> cameraLauncher;
     private ActivityResultLauncher<Intent> galleryLauncher;
+    private String petIdEdicao;
 
-    private EditText edtStatus, edtGenero, edtIdade, edtTamanho;
+    private EditText edtStatus, edtGenero, edtIdade, edtTamanho, edtNome, edtDescricao, edtRaca;
 
     private Button btnSalvar;
     private Button btnTirarFoto;
@@ -57,6 +62,21 @@ public class CadastroAdminActivity extends AppCompatActivity {
 
         initViews();
         setupPickers();
+
+        petIdEdicao = getIntent().getStringExtra("petId");
+        if (petIdEdicao != null) {
+            // Edição: preencher campos
+            edtNome.setText(getIntent().getStringExtra("nome"));
+            edtDescricao.setText(getIntent().getStringExtra("descricao"));
+            edtGenero.setText(getIntent().getStringExtra("genero"));
+            edtIdade.setText(getIntent().getStringExtra("idade"));
+            edtRaca.setText(getIntent().getStringExtra("raca"));
+            edtTamanho.setText(getIntent().getStringExtra("tamanho"));
+
+            int statusInt = getIntent().getIntExtra("status", 0);
+            edtStatus.setText(statusInt == 0 ? "Disponível" : "Adotado");
+        }
+
         setupButtons();
         setupActivityLaunchers();
 
@@ -68,6 +88,9 @@ public class CadastroAdminActivity extends AppCompatActivity {
         edtGenero = findViewById(R.id.edtGenero);
         edtIdade = findViewById(R.id.edtIdade);
         edtTamanho = findViewById(R.id.edtTamanho);
+        edtNome = findViewById(R.id.edtNome);
+        edtDescricao = findViewById(R.id.edtDescricao);
+        edtRaca = findViewById(R.id.edtRaca);
 
         btnSalvar = findViewById(R.id.btnSalvar);
         btnTirarFoto = findViewById(R.id.btnTirarFoto);
@@ -93,9 +116,60 @@ public class CadastroAdminActivity extends AppCompatActivity {
 
     private void setupButtons() {
         btnSalvar.setOnClickListener(v -> {
-            Intent intent = new Intent(CadastroAdminActivity.this, ListaGatosActivity.class);
-            startActivity(intent);
-            finish();
+            String nome = edtNome.getText().toString().trim();
+            String idade = edtIdade.getText().toString().trim();
+            String genero = edtGenero.getText().toString().trim();
+            String raca = edtRaca.getText().toString().trim();
+            String tamanho = edtTamanho.getText().toString().trim();
+            String statusStr = edtStatus.getText().toString().trim();
+            String descricao = edtDescricao.getText().toString().trim();
+
+            if (nome.isEmpty() || idade.isEmpty() || genero.isEmpty() || raca.isEmpty() || tamanho.isEmpty() || statusStr.isEmpty() || descricao.isEmpty()) {
+                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int status = statusStr.equalsIgnoreCase("Disponível") ? 0 : 1;
+
+            // todo: fazer a parte das fotos
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            if (petIdEdicao != null) {
+                // Atualiza
+                Map<String, Object> dadosAtualizados = new HashMap<>();
+                dadosAtualizados.put("name", nome);
+                dadosAtualizados.put("description", descricao);
+                dadosAtualizados.put("gender", genero);
+                dadosAtualizados.put("age", idade);
+                dadosAtualizados.put("race", raca);
+                dadosAtualizados.put("size", tamanho);
+                dadosAtualizados.put("status", status);
+                // se quiser salvar fotos depois: dadosAtualizados.put("photos", ...);
+
+                db.collection("pets").document(petIdEdicao)
+                        .update(dadosAtualizados)
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(this, "Pet atualizado com sucesso!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(this, ListaGatosActivity.class));
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(this, "Erro ao atualizar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                // Cadastro novo
+                GatoModel gato = new GatoModel(nome, descricao, genero, idade, raca, tamanho, status);
+                db.collection("pets")
+                        .add(gato)
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(this, "Pet cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(this, ListaGatosActivity.class));
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(this, "Erro ao cadastrar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            }
         });
 
         btnTirarFoto.setOnClickListener(v -> {

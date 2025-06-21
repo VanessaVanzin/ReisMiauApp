@@ -48,13 +48,27 @@ public class ListaGatosActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // Firestore
+        carregarPets();
+
+        BottomNavBarHelper.setup(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregarPets();
+    }
+
+    private void carregarPets() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference petsRef = db.collection("pets");
 
         petsRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                gatoLista.clear();
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     GatoModel gato = doc.toObject(GatoModel.class);
+                    gato.petId = doc.getId();
                     gatoLista.add(gato);
                 }
                 adapter.notifyDataSetChanged();
@@ -62,7 +76,5 @@ public class ListaGatosActivity extends AppCompatActivity {
                 Log.e("FIREBASE", "Erro ao buscar pets", task.getException());
             }
         });
-
-        BottomNavBarHelper.setup(this);
     }
 }

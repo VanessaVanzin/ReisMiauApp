@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class GatoModel {
 
+    public String petId;
+
     public String name;
     public String description;
     public String gender;
@@ -16,8 +18,13 @@ public class GatoModel {
 
     public GatoModel() {
     }
-    public GatoModel(String nome, String descricao) {
-        this.name = nome;
-        this.description = descricao;
+    public GatoModel(String name, String description, String gender, String age, String race, String size, int status) {
+        this.name = name;
+        this.description = description;
+        this.gender = gender;
+        this.age = age;
+        this.race = race;
+        this.size = size;
+        this.status = status;
     }
 }
