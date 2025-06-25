@@ -61,6 +61,7 @@ public class CadastroAdminActivity extends AppCompatActivity {
     private List<Uri> listaFotosUris = new ArrayList<>();
     private List<String> fotosExistentes = new ArrayList<>();
     private FotoPreviewAdapter fotoAdapter;
+    private final List<String> imagensRemoverFirebase = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +122,15 @@ public class CadastroAdminActivity extends AppCompatActivity {
 
         recyclerFotos = findViewById(R.id.recyclerFotos);
         recyclerFotos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        fotoAdapter = new FotoPreviewAdapter(this, listaFotosUris);
+        fotoAdapter = new FotoPreviewAdapter(this, listaFotosUris, uri -> {
+            if (uri != null) {
+                String uriStr = uri.toString();
+                if (uriStr.startsWith("https://")) {
+                    imagensRemoverFirebase.add(uriStr);
+                    fotosExistentes.remove(uriStr);
+                }
+            }
+        });
         recyclerFotos.setAdapter(fotoAdapter);
     }
 
@@ -221,6 +230,12 @@ public class CadastroAdminActivity extends AppCompatActivity {
 
                                 if (listaFotosFinal.size() == fotosExistentes.size() + novasFotos.size()) {
                                     GatoModel gato = new GatoModel(nome, descricao, genero, idade, raca, tamanho, status, listaFotosFinal);
+
+                                    for (String url : imagensRemoverFirebase) {
+                                        String path = url.substring(url.indexOf("petsImage"));
+                                        FirebaseStorage.getInstance().getReference().child(path).delete();
+                                    }
+
                                     salvarNoFirestore(db, gato);
                                 }
                             }))

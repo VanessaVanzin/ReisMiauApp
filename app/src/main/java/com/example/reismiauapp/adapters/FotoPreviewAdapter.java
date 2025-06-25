@@ -20,10 +20,16 @@ public class FotoPreviewAdapter extends RecyclerView.Adapter<FotoPreviewAdapter.
 
     private final List<Uri> imagens;
     private final Context context;
+    private final OnImageRemovedListener removeListener;
 
-    public FotoPreviewAdapter(Context context, List<Uri> imagens) {
+    public interface OnImageRemovedListener {
+        void onImageRemoved(Uri uri);
+    }
+
+    public FotoPreviewAdapter(Context context, List<Uri> imagens, OnImageRemovedListener removeListener) {
         this.context = context;
         this.imagens = imagens;
+        this.removeListener = removeListener;
     }
 
     public static class FotoViewHolder extends RecyclerView.ViewHolder {
@@ -58,11 +64,14 @@ public class FotoPreviewAdapter extends RecyclerView.Adapter<FotoPreviewAdapter.
                             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                             context.startActivity(intent);
                         } else if (which == 1) {
-                            // Excluir
                             int adapterPosition = holder.getAdapterPosition();
                             if (adapterPosition != RecyclerView.NO_POSITION) {
-                                imagens.remove(adapterPosition);
+                                Uri uriRemovida = imagens.remove(adapterPosition);
                                 notifyItemRemoved(adapterPosition);
+
+                                if (removeListener != null) {
+                                    removeListener.onImageRemoved(uriRemovida);
+                                }
                             }
                         }
                     })
