@@ -200,8 +200,18 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_gallery"
                     android:text="Da Galeria"/>
-
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerFotos"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:clipToPadding="false"
+                android:paddingHorizontal="8dp"/>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSalvar"
                 android:layout_width="match_parent"

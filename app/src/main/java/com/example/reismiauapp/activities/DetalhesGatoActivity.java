@@ -18,17 +18,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.reismiauapp.R;
+import com.example.reismiauapp.adapters.ImageSliderAdapter;
 import com.example.reismiauapp.helpers.BottomNavBarHelper;
 import com.example.reismiauapp.helpers.UsuarioHelper;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class DetalhesGatoActivity extends AppCompatActivity {
 
     private String nome;
     private String descricao;
-    private String fotoUrl;
+    //  private String fotoUrl;
     private String genero;
     private String idade;
     private String raca;
@@ -37,9 +41,10 @@ public class DetalhesGatoActivity extends AppCompatActivity {
     private int status;
 
     private TextView catName, catDescription, catGender, catAge, catRace, catSize, catStatus;
-    private ImageView catImage;
+    //  private ImageView catImage;
     private ImageButton btnEditar, btnVoltar, btnExcluir;
     private Button btnAdotar;
+    private ViewPager2 viewPagerFotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +77,7 @@ public class DetalhesGatoActivity extends AppCompatActivity {
         petId = getIntent().getStringExtra("petId");
         nome = intent.getStringExtra("nome");
         descricao = intent.getStringExtra("descricao");
-        fotoUrl = intent.getStringExtra("fotoUrl");
+//        fotoUrl = intent.getStringExtra("fotoUrl");
         genero = intent.getStringExtra("genero");
         idade = intent.getStringExtra("idade");
         raca = intent.getStringExtra("raca");
@@ -83,7 +88,7 @@ public class DetalhesGatoActivity extends AppCompatActivity {
     private void inicializarViews() {
         catName = findViewById(R.id.catName);
         catDescription = findViewById(R.id.catDescription);
-        catImage = findViewById(R.id.catImage);
+//        catImage = findViewById(R.id.catImage);
         catGender = findViewById(R.id.catGender);
         catAge = findViewById(R.id.catAge);
         catRace = findViewById(R.id.catRace);
@@ -93,6 +98,7 @@ public class DetalhesGatoActivity extends AppCompatActivity {
         btnVoltar = findViewById(R.id.btnVoltar);
         btnExcluir = findViewById(R.id.btnExcluir);
         catStatus = findViewById(R.id.catStatus);
+        viewPagerFotos = findViewById(R.id.viewPagerFotos);
     }
 
     private void preencherDadosNaTela() {
@@ -104,13 +110,11 @@ public class DetalhesGatoActivity extends AppCompatActivity {
         catSize.setText(tamanho != null ? tamanho : "");
         catStatus.setText(status == 0 ? "Disponível" : "Adotado");
 
-        if (fotoUrl != null && !fotoUrl.isEmpty()) {
-            Glide.with(this)
-                    .load(fotoUrl)
-                    .placeholder(R.drawable.gatoteste)
-                    .into(catImage);
-        } else {
-            catImage.setImageResource(R.drawable.gatoteste);
+        ArrayList<String> fotos = getIntent().getStringArrayListExtra("fotos");
+
+        if (fotos != null && !fotos.isEmpty()) {
+            ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this, fotos);
+            viewPagerFotos.setAdapter(sliderAdapter);
         }
     }
 
@@ -125,7 +129,12 @@ public class DetalhesGatoActivity extends AppCompatActivity {
             editIntent.putExtra("raca", raca);
             editIntent.putExtra("tamanho", tamanho);
             editIntent.putExtra("status", status);
-            //editIntent.putExtra("fotoUrl", fotoUrl); // se quiser preencher depois
+
+            ArrayList<String> fotos = getIntent().getStringArrayListExtra("fotos");
+            if (fotos != null) {
+                editIntent.putStringArrayListExtra("fotos", fotos);
+            }
+
             startActivity(editIntent);
         });
 

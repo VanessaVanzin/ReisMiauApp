@@ -35,11 +35,13 @@
         app:layout_constraintHeight_percent="0.45"
         app:layout_constraintBottom_toTopOf="@id/cardInfo">
 
-        <ImageView
-            android:id="@+id/catImage"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerFotos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:overScrollMode="never" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

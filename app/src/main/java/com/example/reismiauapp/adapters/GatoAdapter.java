@@ -16,7 +16,9 @@ import com.example.reismiauapp.activities.DetalhesGatoActivity;
 import com.example.reismiauapp.R;
 import com.example.reismiauapp.models.GatoModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GatoAdapter extends RecyclerView.Adapter<GatoAdapter.GatoViewHolder>{
 
@@ -51,10 +53,9 @@ public class GatoAdapter extends RecyclerView.Adapter<GatoAdapter.GatoViewHolder
                 String url = gato.photos.get(0).get("url");
                 Glide.with(imageView.getContext())
                         .load(url)
-                        .placeholder(R.drawable.gatoteste)
                         .into(imageView);
             } else {
-                imageView.setImageResource(R.drawable.gatoteste);
+                imageView.setImageDrawable(null);
             }
         }
 
@@ -84,9 +85,12 @@ public class GatoAdapter extends RecyclerView.Adapter<GatoAdapter.GatoViewHolder
             intent.putExtra("status", gato.status);
             intent.putExtra("petId", gato.petId);
 
-            if (gato.photos != null && !gato.photos.isEmpty()) {
-                intent.putExtra("fotoUrl", gato.photos.get(0).get("url"));
+            ArrayList<String> fotos = new ArrayList<>();
+            for (Map<String, String> foto : gato.photos) {
+                fotos.add(foto.get("url"));
             }
+            intent.putStringArrayListExtra("fotos", fotos);
+
             context.startActivity(intent);
         });
     }

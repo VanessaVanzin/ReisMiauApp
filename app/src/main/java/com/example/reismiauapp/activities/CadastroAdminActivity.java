@@ -22,14 +22,22 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.reismiauapp.adapters.FotoPreviewAdapter;
+import com.example.reismiauapp.helpers.ImagemHelper;
 import com.example.reismiauapp.models.GatoModel;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.reismiauapp.R;
 import com.example.reismiauapp.helpers.BottomNavBarHelper;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class CadastroAdminActivity extends AppCompatActivity {
 
@@ -48,6 +56,11 @@ public class CadastroAdminActivity extends AppCompatActivity {
     private final String[] generoOptions = {"M", "F"};
     private final String[] tamanhoOptions = {"Mini", "P", "M", "G", "XG"};
     private final String[] idadeOptions = {"Filhote", "Adulto", "Sênior"};
+
+    private RecyclerView recyclerFotos;
+    private List<Uri> listaFotosUris = new ArrayList<>();
+    private List<String> fotosExistentes = new ArrayList<>();
+    private FotoPreviewAdapter fotoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +88,15 @@ public class CadastroAdminActivity extends AppCompatActivity {
 
             int statusInt = getIntent().getIntExtra("status", 0);
             edtStatus.setText(statusInt == 0 ? "Disponível" : "Adotado");
+
+            ArrayList<String> fotosSalvas = getIntent().getStringArrayListExtra("fotos");
+            if (fotosSalvas != null) {
+                for (String url : fotosSalvas) {
+                    fotosExistentes.add(url);
+                    listaFotosUris.add(Uri.parse(url));
+                }
+                fotoAdapter.notifyDataSetChanged();
+            }
         }
 
         setupButtons();
@@ -96,6 +118,11 @@ public class CadastroAdminActivity extends AppCompatActivity {
         btnTirarFoto = findViewById(R.id.btnTirarFoto);
         btnDaGaleria = findViewById(R.id.btnDaGaleria);
         btnVoltar = findViewById(R.id.btnVoltar);
+
+        recyclerFotos = findViewById(R.id.recyclerFotos);
+        recyclerFotos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        fotoAdapter = new FotoPreviewAdapter(this, listaFotosUris);
+        recyclerFotos.setAdapter(fotoAdapter);
     }
 
     private void setupPickers() {
@@ -128,48 +155,10 @@ public class CadastroAdminActivity extends AppCompatActivity {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             int status = statusStr.equalsIgnoreCase("Disponível") ? 0 : 1;
 
-            // todo: fazer a parte das fotos
+            uploadFotosECadastro(nome, idade, genero, raca, tamanho, status, descricao);
 
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            if (petIdEdicao != null) {
-                // Atualiza
-                Map<String, Object> dadosAtualizados = new HashMap<>();
-                dadosAtualizados.put("name", nome);
-                dadosAtualizados.put("description", descricao);
-                dadosAtualizados.put("gender", genero);
-                dadosAtualizados.put("age", idade);
-                dadosAtualizados.put("race", raca);
-                dadosAtualizados.put("size", tamanho);
-                dadosAtualizados.put("status", status);
-                // se quiser salvar fotos depois: dadosAtualizados.put("photos", ...);
-
-                db.collection("pets").document(petIdEdicao)
-                        .update(dadosAtualizados)
-                        .addOnSuccessListener(aVoid -> {
-                            Toast.makeText(this, "Pet atualizado com sucesso!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(this, ListaGatosActivity.class));
-                            finish();
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(this, "Erro ao atualizar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        });
-            } else {
-                // Cadastro novo
-                GatoModel gato = new GatoModel(nome, descricao, genero, idade, raca, tamanho, status);
-                db.collection("pets")
-                        .add(gato)
-                        .addOnSuccessListener(documentReference -> {
-                            Toast.makeText(this, "Pet cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(this, ListaGatosActivity.class));
-                            finish();
-                        })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(this, "Erro ao cadastrar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        });
-            }
         });
 
         btnTirarFoto.setOnClickListener(v -> {
@@ -189,6 +178,96 @@ public class CadastroAdminActivity extends AppCompatActivity {
         btnVoltar.setOnClickListener(v -> finish());
     }
 
+    private void uploadFotosECadastro(String nome, String idade, String genero, String raca, String tamanho, int status, String descricao) {
+        if (listaFotosUris.isEmpty()) {
+            Toast.makeText(this, "Adicione pelo menos uma imagem do pet", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        List<Map<String, String>> listaFotosFinal = new ArrayList<>();
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        for (String url : fotosExistentes) {
+            Map<String, String> fotoMap = new HashMap<>();
+            fotoMap.put("url", url);
+            listaFotosFinal.add(fotoMap);
+        }
+
+        List<Uri> novasFotos = new ArrayList<>();
+        for (Uri uri : listaFotosUris) {
+            if (!uri.toString().startsWith("https://")) {
+                novasFotos.add(uri);
+            }
+        }
+
+        if (novasFotos.isEmpty()) {
+            GatoModel gato = new GatoModel(nome, descricao, genero, idade, raca, tamanho, status, listaFotosFinal);
+            salvarNoFirestore(db, gato);
+            return;
+        }
+
+        for (int i = 0; i < novasFotos.size(); i++) {
+            Uri uri = novasFotos.get(i);
+            String fileName = "petsImage/" + System.currentTimeMillis() + "_" + i + ".jpg";
+
+            storage.getReference().child(fileName).putFile(uri)
+                    .addOnSuccessListener(taskSnapshot -> taskSnapshot.getStorage().getDownloadUrl()
+                            .addOnSuccessListener(downloadUri -> {
+                                Map<String, String> fotoMap = new HashMap<>();
+                                fotoMap.put("url", downloadUri.toString());
+                                listaFotosFinal.add(fotoMap);
+
+                                if (listaFotosFinal.size() == fotosExistentes.size() + novasFotos.size()) {
+                                    GatoModel gato = new GatoModel(nome, descricao, genero, idade, raca, tamanho, status, listaFotosFinal);
+                                    salvarNoFirestore(db, gato);
+                                }
+                            }))
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Erro ao enviar imagem: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
+
+    private void salvarNoFirestore(FirebaseFirestore db, GatoModel gato) {
+        if (petIdEdicao != null) {
+            // Atualização
+            Map<String, Object> dadosAtualizados = new HashMap<>();
+            dadosAtualizados.put("name", gato.name);
+            dadosAtualizados.put("description", gato.description);
+            dadosAtualizados.put("gender", gato.gender);
+            dadosAtualizados.put("age", gato.age);
+            dadosAtualizados.put("race", gato.race);
+            dadosAtualizados.put("size", gato.size);
+            dadosAtualizados.put("status", gato.status);
+            dadosAtualizados.put("photos", gato.photos);
+
+            db.collection("pets").document(petIdEdicao)
+                    .update(dadosAtualizados)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Pet atualizado com sucesso!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this, ListaGatosActivity.class));
+                        finish();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Erro ao atualizar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+            // Novo cadastro
+            db.collection("pets")
+                    .add(gato)
+                    .addOnSuccessListener(documentReference -> {
+                        Toast.makeText(this, "Pet cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this, ListaGatosActivity.class));
+                        finish();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Erro ao cadastrar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        }
+    }
+
     private void setupActivityLaunchers() {
         cameraLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -197,7 +276,11 @@ public class CadastroAdminActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         if (data != null && data.getExtras() != null) {
                             Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-                            // Coloque a imagem na tela aqui
+                            Uri imageUri = ImagemHelper.salvarImagemTemp(this, imageBitmap);
+                            if (imageUri != null) {
+                                listaFotosUris.add(imageUri);
+                                fotoAdapter.notifyItemInserted(listaFotosUris.size() - 1);
+                            }
                         }
                     }
                 }
@@ -210,7 +293,8 @@ public class CadastroAdminActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         if (data != null) {
                             Uri selectedImageUri = data.getData();
-                            // Coloque a imagem na tela aqui
+                            listaFotosUris.add(selectedImageUri);
+                            fotoAdapter.notifyItemInserted(listaFotosUris.size() - 1);
                         }
                     }
                 }
