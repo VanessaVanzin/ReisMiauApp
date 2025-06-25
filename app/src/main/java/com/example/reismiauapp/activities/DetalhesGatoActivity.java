@@ -41,7 +41,6 @@ public class DetalhesGatoActivity extends AppCompatActivity {
     private int status;
 
     private TextView catName, catDescription, catGender, catAge, catRace, catSize, catStatus;
-    //  private ImageView catImage;
     private ImageButton btnEditar, btnVoltar, btnExcluir;
     private Button btnAdotar;
     private ViewPager2 viewPagerFotos;
@@ -77,7 +76,6 @@ public class DetalhesGatoActivity extends AppCompatActivity {
         petId = getIntent().getStringExtra("petId");
         nome = intent.getStringExtra("nome");
         descricao = intent.getStringExtra("descricao");
-//        fotoUrl = intent.getStringExtra("fotoUrl");
         genero = intent.getStringExtra("genero");
         idade = intent.getStringExtra("idade");
         raca = intent.getStringExtra("raca");
@@ -88,7 +86,6 @@ public class DetalhesGatoActivity extends AppCompatActivity {
     private void inicializarViews() {
         catName = findViewById(R.id.catName);
         catDescription = findViewById(R.id.catDescription);
-//        catImage = findViewById(R.id.catImage);
         catGender = findViewById(R.id.catGender);
         catAge = findViewById(R.id.catAge);
         catRace = findViewById(R.id.catRace);
