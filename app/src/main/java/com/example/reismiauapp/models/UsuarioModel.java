@@ -5,7 +5,6 @@ public class UsuarioModel {
     private int tipo;
 
     public UsuarioModel() {
-        // Necessário para Firestore
     }
 
     public UsuarioModel(String user, int tipo) {

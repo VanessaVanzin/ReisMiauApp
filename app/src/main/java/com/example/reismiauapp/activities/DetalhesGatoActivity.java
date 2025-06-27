@@ -32,7 +32,6 @@ public class DetalhesGatoActivity extends AppCompatActivity {
 
     private String nome;
     private String descricao;
-    //  private String fotoUrl;
     private String genero;
     private String idade;
     private String raca;
