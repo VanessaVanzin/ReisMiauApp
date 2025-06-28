@@ -21,6 +21,9 @@ import com.example.reismiauapp.helpers.BottomNavBarHelper;
 
 public class DoacaoActivity extends AppCompatActivity {
 
+    private Button btnSejaParceiro, btnCopiarPix;
+    private ImageView instagramIcon, whatsappIcon, emailIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +35,11 @@ public class DoacaoActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button btnSejaParceiro = findViewById(R.id.doacao_button);
-        Button btnCopiarPix = findViewById(R.id.btn_copiar_chave_pix);
-        ImageView instagramIcon = findViewById(R.id.ic_instagram);
-        ImageView whatsappIcon = findViewById(R.id.ic_whatsapp);
-        ImageView emailIcon = findViewById(R.id.ic_mail);
+        btnSejaParceiro = findViewById(R.id.doacao_button);
+        btnCopiarPix = findViewById(R.id.btn_copiar_chave_pix);
+        instagramIcon = findViewById(R.id.ic_instagram);
+        whatsappIcon = findViewById(R.id.ic_whatsapp);
+        emailIcon = findViewById(R.id.ic_mail);
 
         btnSejaParceiro.setOnClickListener(v -> {
             String phoneNumber = "+5554991202991";

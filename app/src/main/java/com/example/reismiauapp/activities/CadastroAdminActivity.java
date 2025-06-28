@@ -41,22 +41,15 @@ import com.google.firebase.storage.FirebaseStorage;
 
 public class CadastroAdminActivity extends AppCompatActivity {
 
-    private ActivityResultLauncher<Intent> cameraLauncher;
-    private ActivityResultLauncher<Intent> galleryLauncher;
+    private ActivityResultLauncher<Intent> cameraLauncher, galleryLauncher;
     private String petIdEdicao;
-
     private EditText edtStatus, edtGenero, edtIdade, edtTamanho, edtNome, edtDescricao, edtRaca;
-
-    private Button btnSalvar;
-    private Button btnTirarFoto;
-    private Button btnDaGaleria;
+    private Button btnSalvar, btnTirarFoto, btnDaGaleria;
     private ImageButton btnVoltar;
-
     private final String[] statusOptions = {"Disponível", "Adotado"};
     private final String[] generoOptions = {"M", "F"};
     private final String[] tamanhoOptions = {"Mini", "P", "M", "G", "XG"};
     private final String[] idadeOptions = {"Filhote", "Adulto", "Sênior"};
-
     private RecyclerView recyclerFotos;
     private List<Uri> listaFotosUris = new ArrayList<>();
     private List<String> fotosExistentes = new ArrayList<>();

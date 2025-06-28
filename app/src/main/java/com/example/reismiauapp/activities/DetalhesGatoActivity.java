@@ -30,15 +30,8 @@ import java.util.ArrayList;
 
 public class DetalhesGatoActivity extends AppCompatActivity {
 
-    private String nome;
-    private String descricao;
-    private String genero;
-    private String idade;
-    private String raca;
-    private String tamanho;
-    private String petId;
+    private String nome, descricao, genero, idade, raca, tamanho, petId;
     private int status;
-
     private TextView catName, catDescription, catGender, catAge, catRace, catSize, catStatus;
     private ImageButton btnEditar, btnVoltar, btnExcluir;
     private Button btnAdotar;
